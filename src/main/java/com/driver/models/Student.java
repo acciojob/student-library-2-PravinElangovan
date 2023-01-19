@@ -1,6 +1,7 @@
 package com.driver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +9,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table
+
 public class Student {
 
     @Id
@@ -32,13 +35,6 @@ public class Student {
     private Card card;
 
 
-    public Student(String email, String name, int age, String country) {
-        this.emailId = email;
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
     @CreationTimestamp
     private Date createdOn;
 
@@ -56,6 +52,13 @@ public class Student {
                 ", createdOn=" + createdOn +
                 ", updatedOn=" + updatedOn +
                 '}';
+    }
+
+    public Student(String emailId, String name, int age, String country) {
+        this.emailId = emailId;
+        this.name = name;
+        this.age = age;
+        this.country = country;
     }
 
     public int getId() {

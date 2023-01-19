@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table
+
 public class Card {
 
     @Id
@@ -21,6 +23,20 @@ public class Card {
 
     @CreationTimestamp
     private Date createdOn;
+
+    @UpdateTimestamp
+    private Date updatedOn;
+
+    @Enumerated(value = EnumType.STRING)
+    private CardStatus cardStatus;
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("card")
+    private List<Book> books;
+
+    public Card(){
+        this.cardStatus = CardStatus.ACTIVATED;
+    }
 
     public int getId() {
         return id;
@@ -68,19 +84,5 @@ public class Card {
 
     public void setBooks(List<Book> books) {
         this.books = books;
-    }
-
-    @UpdateTimestamp
-    private Date updatedOn;
-
-    @Enumerated(value = EnumType.STRING)
-    private CardStatus cardStatus;
-
-    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("card")
-    private List<Book> books;
-
-    public Card(){
-        this.cardStatus = CardStatus.ACTIVATED;
     }
 }

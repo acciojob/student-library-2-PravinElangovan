@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Table
+
 public class Transaction {
 
     @Id
@@ -37,23 +39,11 @@ public class Transaction {
     @CreationTimestamp
     private Date transactionDate;
 
-    public String getTransactionId() {
-        return transactionId;
+    public Transaction(int fineAmount, boolean isIssueOperation, TransactionStatus transactionStatus) {
+        this.fineAmount = fineAmount;
+        this.isIssueOperation = isIssueOperation;
+        this.transactionStatus = transactionStatus;
     }
-
-    public Transaction() {
-    }
-
-//    public Transaction(int id, String transactionId, Card card, Book book, int fineAmount, boolean isIssueOperation, TransactionStatus transactionStatus, Date transactionDate) {
-//        this.id = id;
-//        this.transactionId = transactionId;
-//        this.card = card;
-//        this.book = book;
-//        this.fineAmount = fineAmount;
-//        this.isIssueOperation = isIssueOperation;
-//        this.transactionStatus = transactionStatus;
-//        this.transactionDate = transactionDate;
-//    }
 
     public int getId() {
         return id;
@@ -61,6 +51,14 @@ public class Transaction {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     public Card getCard() {
@@ -105,6 +103,9 @@ public class Transaction {
 
     public Date getTransactionDate() {
         return transactionDate;
+    }
+
+    public Transaction() {
     }
 
     public void setTransactionDate(Date transactionDate) {
