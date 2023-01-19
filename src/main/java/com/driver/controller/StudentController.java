@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 //Add required annotations
 @RestController
-@RequestMapping("/student")
+@RequestMapping("student")
 public class StudentController {
 
     //Add required annotations
     @Autowired
     StudentService studentService;
-
     @GetMapping("/studentByEmail")
     public ResponseEntity<String> getStudentByEmail(@RequestParam("email") String email){
         studentService.getDetailsByEmail(email);
@@ -45,7 +44,7 @@ public class StudentController {
 
     //Add required annotations
     @DeleteMapping("/")
-    public ResponseEntity deleteStudent(@RequestParam("id") int id){
+    public ResponseEntity<String> deleteStudent(@RequestParam("id") int id){
         studentService.deleteStudent(id);
         return new ResponseEntity<>("student is deleted", HttpStatus.ACCEPTED);
     }
