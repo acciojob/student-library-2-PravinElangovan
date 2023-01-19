@@ -15,33 +15,20 @@ public class BookService {
 
     @Autowired
     BookRepository bookRepository2;
-
     @Autowired
-    AuthorRepository authorRepository2;
+    AuthorRepository authorRepository;
 
-    public void createBook(Book book){
-        try{
-            int authId=book.getAuthor().getId();
-            Author author=authorRepository2.findById(authId).get();
-            author.getBooksWritten().add(book);
-            book.setAuthor(author);
-            bookRepository2.save(book);
-            authorRepository2.save(author);
-        }
-        catch (Exception e){
-            return;
-        }
+    public void createBook(Book book) {
+        bookRepository2.save(book);
     }
 
-    public List<Book> getBooks(String genre, boolean available, String author){
-//        List<Book> books = bookRepository2.findAll(); //find the elements of the list by yourself
-
-        if((genre != null) && (author != null)){
-            return bookRepository2.findBooksByGenreAuthor(genre,author,available);
+    public List<Book> getBooks(String genre, boolean available, String author) {
+        if(genre != null && author != null){
+            return bookRepository2.findBooksByGenreAuthor(genre, author, available);
         }else if(genre != null){
-            return bookRepository2.findBooksByGenre(genre,available);
+            return bookRepository2.findBooksByGenre(genre, available);
         }else if(author != null){
-            return bookRepository2.findBooksByAuthor(author,available);
+            return bookRepository2.findBooksByAuthor(author, available);
         }else{
             return bookRepository2.findByAvailability(available);
         }
